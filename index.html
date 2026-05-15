@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Klasifikasi Sampah | Edukasi Lingkungan</title>
-    
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
@@ -43,24 +41,50 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
         }
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            padding-bottom: 1.5rem;
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body">
 
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary text-3xl font-bold">recycling</span>
-                <span class="font-headline text-xl font-bold text-primary tracking-tight">GreenWaste</span>
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-3xl font-bold">recycling</span>
+                    <span class="font-headline text-xl font-bold text-primary tracking-tight">GreenWaste</span>
+                </div>
+                
+                <ul class="hidden md:flex items-center gap-8 font-semibold text-sm text-gray-600 uppercase tracking-wider">
+                    <li><a href="#beranda" class="hover:text-primary transition">Beranda</a></li>
+                    <li><a href="#kategori" class="hover:text-primary transition">Kategori</a></li>
+                    <li><a href="#dampak" class="hover:text-primary transition">Dampak</a></li>
+                    <li><a href="#solusi" class="hover:text-primary transition">Solusi</a></li>
+                    <li><a href="#panduan" class="hover:text-primary transition">Panduan</a></li>
+                </ul>
+
+                <button id="menu-btn" class="md:hidden text-primary focus:outline-none">
+                    <span id="menu-icon" class="material-symbols-outlined text-3xl">menu</span>
+                </button>
             </div>
-            
-            <ul class="hidden md:flex items-center gap-8 font-semibold text-sm text-gray-600 uppercase tracking-wider">
-                <li><a href="#beranda" class="hover:text-primary transition">Beranda</a></li>
-                <li><a href="#kategori" class="hover:text-primary transition">Kategori</a></li>
-                <li><a href="#dampak" class="hover:text-primary transition">Dampak</a></li>
-                <li><a href="#solusi" class="hover:text-primary transition">Solusi</a></li>
-                <li><a href="#panduan" class="hover:text-primary transition">Panduan</a></li>
-            </ul>
+
+            <div id="mobile-menu" class="md:hidden">
+                <ul class="flex flex-col gap-4 font-semibold text-gray-600 uppercase tracking-wider px-2">
+                    <li><a href="#beranda" class="mobile-link block py-2 hover:text-primary transition">Beranda</a></li>
+                    <li><a href="#kategori" class="mobile-link block py-2 hover:text-primary transition">Kategori</a></li>
+                    <li><a href="#dampak" class="mobile-link block py-2 hover:text-primary transition">Dampak</a></li>
+                    <li><a href="#solusi" class="mobile-link block py-2 hover:text-primary transition">Solusi</a></li>
+                    <li><a href="#panduan" class="mobile-link block py-2 hover:text-primary transition">Panduan</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -70,7 +94,7 @@
                 <h1 class="font-headline text-5xl md:text-6xl font-extrabold leading-[1.1] text-gray-900">
                     Jaga Bumi dari <span class="text-primary italic">Sampah Kita.</span>
                 </h1>
-                <p class="text-lg text-gray-600 leading-relaxed max-w-md text-center md:text-left">
+                <p class="text-lg text-gray-600 leading-relaxed max-w-md">
                     Mari belajar cara memilah sampah yang benar untuk membantu proses daur ulang dan menjaga ekosistem tetap hijau.
                 </p>
                 <div class="flex justify-center md:justify-start items-center gap-4">
@@ -83,7 +107,7 @@
                 <div class="absolute -inset-4 bg-primary/10 rounded-full blur-3xl"></div>
                 <img src="narr.png" 
                      alt="Waste Management Illustration" 
-                     class="relative rounded-[2rem] shadow-2xl object-cover h-[450px] w-auto mx-auto">
+                     class="relative rounded-[2rem] shadow-2xl object-cover h-auto w-full max-w-[500px]">
             </div>
         </div>
     </section>
@@ -221,6 +245,27 @@
             <p>© 2026 PHP TEAM. Mari bersama menjaga bumi untuk generasi mendatang.</p>
         </div>
     </footer>
+
+    <script>
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        const links = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('open');
+            const isOpen = menu.classList.contains('open');
+            icon.innerText = isOpen ? 'close' : 'menu';
+        });
+
+        // Auto Close on Click Menu Item
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('open');
+                icon.innerText = 'menu';
+            });
+        });
+    </script>
 
 </body>
 </html>
